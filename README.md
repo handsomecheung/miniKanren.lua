@@ -5,14 +5,19 @@ miniKanren.lua
 [miniKanren](http://minikanren.org/) is a minimalist logic programming language.
 This project is an implemention of miniKanren in Lua.
 
+
 ## Usage
 Core miniKanren.lua extends Lua with three operations:
 `eq()`, `all()`, and `conde()`(also `alli()` and `condi()`, where i means interleaves).
+
 `eq()` unifies two term, which return false when failed to unify, or return a pair called `substitution`.
 There is also two function `run()` and `fresh_vars()`.
+
 `run()` serves as an interface between Lua and miniKanren.lua, and whose value is a list.
+
 `fresh_vars()` introduces a certain number of fresh variables,
 which takes an argument to specify the number of fresh variables.
+
 
 For example:
 
