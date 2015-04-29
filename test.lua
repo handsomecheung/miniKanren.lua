@@ -158,3 +158,12 @@ assert(table_eq(run(1, a, fd_all_different(list(1, 2, 3, 4, 5, 6, 7, 8, 9))), {"
 
 assert(table_eq(run(false, a, fd_domain(list(build_bit(2), build_bit(5), build_bit(1), build_bit(9)), build_bit(1), build_bit(9))), {"_.0"}))
 assert(table_eq(run(false, a, fd_domain(list(build_bit(2), build_bit(10), build_bit(1), build_bit(9)), build_bit(1), build_bit(9))), {}))
+
+assert(table_eq(
+          run(false, a, all(
+                 eq(a, b),
+                 eq(b, c),
+                 not_eq(a, 1),
+                 not_eq(b, 2),
+                 not_eq(c, 3)))
+          , { "_.0 not eq: 3,2,1" }))

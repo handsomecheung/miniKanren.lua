@@ -127,7 +127,7 @@ local function assq_back(k, s)
    if k == cdr(ss) then
       return car(ss)
    else
-      return assq(k, cdr(s))
+      return assq_back(k, cdr(s))
    end
 end
 
