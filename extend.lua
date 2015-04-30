@@ -27,20 +27,6 @@ local function cdro(p, d)
    return conso(a, d, p)
 end
 
-local function counto(p, c)
-   local d, cc = fresh_vars(2)
-   return cond(
-      all(
-         nullo(p),
-         eq({}, c)),
-      all(
-         cdro(p, d),
-         function(s) return counto(d, cc)(s) end,
-         plus_1o(cc, c)
-      )
-   )
-end
-
 local function append_heado(p1, e, p2)
    return conso(e, p1, p2)
 end
@@ -62,6 +48,5 @@ return {
    pairo=pairo,
    caro=caro,
    cdro=cdro,
-   counto=counto,
    mergeo=mergeo,
 }

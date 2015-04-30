@@ -61,12 +61,12 @@ function addero(d, n, m, r)
    )
 end
 
-local function plus_1o(n, k)
-   return pluso({1}, n, k)
-end
-
 local function pluso(n, m, k)
    return addero(0, n, m, k)
+end
+
+local function plus_1o(n, k)
+   return pluso({1}, n, k)
 end
 
 local function minuso(n, m, k)
@@ -207,6 +207,19 @@ local function divo(n, m, q, r)
                    function(s) return divo(nh, m, qh, rh)(s) end))))
 end
 
+local function counto(p, c)
+   local d, cc = fresh_vars(2)
+   return cond(
+      all(
+         nullo(p),
+         eq({}, c)),
+      all(
+         cdro(p, d),
+         function(s) return counto(d, cc)(s) end,
+         plus_1o(cc, c)
+      )
+   )
+end
 
 return {
    poso=poso,
@@ -219,4 +232,5 @@ return {
    lto=lto,
    leo=leo,
    divo=divo,
+   counto=counto,
 }
