@@ -92,7 +92,7 @@ run(false, a, all(
 -- { "_.0" }
 ```
 
-`not_eq()`:
+not_eq():
 
 ```lua
 a, b = fresh_vars(2)
