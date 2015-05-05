@@ -257,11 +257,33 @@ local function ext_subst_d(x, y, s)
    end
 end
 
+local function equal(x, y)
+   if x == y then
+      return true
+   elseif is_var(x) or is_var(y) then
+      return false
+   elseif is_table(x) and is_table(y) and equal(getmetatable(x), getmetatable(y)) then
+      for k, v in pairs(x) do
+         if not equal(v, y[k]) then
+            return false
+         end
+      end
+      for k, v in pairs(y) do
+         if not equal(v, x[k]) then
+            return false
+         end
+      end
+      return true
+   else
+      return false
+   end
+end
+
 local function verify_subst_d(a, d)
    if is_empty(d) then
       return true
    else
-      if walk(car(car(d)), a) == walk(cdr(car(d)), a) then
+      if equal(walk(car(car(d)), a), walk(cdr(car(d)), a)) then
          return false
       else
          return verify_subst_d(a, cdr(d))
@@ -465,7 +487,8 @@ return {
 
    list=list,
    cons=cons,
+   car=car,
+   cdr=cdr,
 
-   build_bit=build_bit,
-   build_num=build_num,
+   equal=equal,
 }
