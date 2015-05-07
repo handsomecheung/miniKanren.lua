@@ -107,7 +107,7 @@ local function sudoku_4x4(puzzle)
          col1, col2, col3, col4,
          square1, square2, square3, square4 = fresh_vars(28)
 
-   r = run(1, puzzle,
+   local r = run(1, puzzle,
        all(
           eq(puzzle, list(s11, s12, s13, s14,
                           s21, s22, s23, s24,
