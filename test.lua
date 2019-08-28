@@ -105,6 +105,10 @@ assert(equal(run(false, {a, b, c}, all(eq(a, 2), eq(a, b), not_eq(b, 3))), {{2, 
 assert(equal(run(false, {a, b, c}, all(eq(c, 2), eq(a, b), not_eq(b, 3))), { { "_.0 not eq: 3", "_.0 not eq: 3", 2 } }))
 assert(equal(run(false, {a, b}, all(eq(a, b), not_eq(a, 3))), { { "_.0 not eq: 3", "_.0 not eq: 3" } }))
 
+assert(equal(run(1, a, eq(a, list(a, a))), {}))
+assert(equal(run(1, a, eq(a, list(a, b))), {}))
+assert(equal(run(1, a, eq(a, list(b, a))), {}))
+
 assert(equal(run(1, a, mergeo({1, {2, {3}}}, {4, {5, {6, {}}}}, a)), { list(1, 2, 3, 4, 5, 6) }))
 
 assert(equal(run(1, a, mergeo({1}, {2}, a)), { {1, {2}} }))
