@@ -167,15 +167,22 @@ local function walk_all(v, s)
    end
 end
 
+local function occurs_check(var, term)
+   if not is_table(term) then return false end
+   if #term == 0 then return false end
+   if is_var(term) then return var == term end
+   return occurs_check(var, car(term)) or occurs_check(var, cdr(term))
+end
+
 local function unify(k, v, s)
    local k = walk(k, s)
    local v = walk(v, s)
    if k == v then
       return s
    elseif is_var(k) then
-      return cons(cons(k, v), s)
+      return (not occurs_check(k, v)) and cons(cons(k, v), s)
    elseif is_var(v) then
-      return cons(cons(v, k), s)
+      return (not occurs_check(v, k)) and cons(cons(v, k), s)
    elseif is_var(k) or is_var(v) then
       return cons(cons(k, v), s)
    elseif is_pair(v) and is_pair(k) then
